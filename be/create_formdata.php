@@ -94,6 +94,7 @@ echo json_encode([
         'id' => $koneksi->insert_id,
         'nim' => $nim,
         'nama' => $nama,
+        'hp' => $hp,
         'photo' => $namaPhoto
     ]
 ]);
