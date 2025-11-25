@@ -19,8 +19,8 @@ if (!isset($_POST['nim'])) {
     if ($_POST['nim'] == '') {
         $errors['nim'] = "NIM tidak boleh kosong";
     } else {
-        if (!preg_match('/^[1-9][0-9]{9}$/', $_POST['nim'])) {
-            $errors['nim'] = "Format NIM salah";
+        if (!preg_match('/^[1-9][0-9]{2}$/', $_POST['nim'])) {
+            $errors['nim'] = "Format NIM harus 3 digit angka, angka tidak boleh 0";
         }
     }
 }

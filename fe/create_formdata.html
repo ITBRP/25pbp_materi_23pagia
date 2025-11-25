@@ -1,0 +1,41 @@
+<form id="studentForm">
+    <input type="text" name="nama" placeholder="Masukkan nama"><br>
+    <span class="error nama" style="color: red;"></span><br>
+    <input type="text" name="nim" placeholder="Masukkan NIM"><br>
+    <span class="error nim" style="color: red;"></span><br>
+    <input type="text" name="hp" placeholder="Masukkan hp"><br>
+    <span class="error hp" style="color: red;"></span><br>
+    <input type="file" name="photo"><br>
+    <span class="error photo" style="color: red;"></span><br>
+    <button type="submit">Kirim</button>
+</form>
+
+<script src="assets/jquery-3.7.1.min.js"></script>
+
+<script>
+    $('#studentForm').on('submit', function (e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+
+        $.ajax({
+            url: 'http://localhost:800/www/2526_ganjil/25pbp_23pagia/be/create_formdata.php', // ganti sesuai endpoint API kamu
+            type: 'POST',
+            data: formData,
+            processData: false, // biarkan browser kirim apa adanya (FormData)
+            contentType: false, // biarkan header otomatis
+            beforeSend: function(){
+                $('.error').text("");
+            },
+            success: function (response) {
+                alert(response.msg+", data atas nama "+response.data.nama+" berhasil ditambahkan");
+                $('#studentForm').trigger('reset');
+            },
+            error: function (xhr, responseText) {
+                response = JSON.parse(xhr.responseText);
+                Object.entries(response.errors).forEach(([key, val]) => {
+                    $(`.error.${key}`).text(val);
+                });
+            }
+        });
+    });
+</script>
