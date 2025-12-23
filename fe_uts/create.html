@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+<body>
+    <!-- UI Form nya -->
+
+    <div class="container pt-5">
+        <div class="row justify-content-center">
+            <div class="col-6 border border-secondary bg-light p-5">
+                <h3>Form Input Data Buku</h3>
+                <hr>
+                <form id="myForm" enctype="multipart/form-data">
+                    <div class="form-group mb-3">
+                        <label>Judul</label>
+                        <input type="text" class="form-control" name="title">
+                        <div class="invalid-feedback" id="title"></div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Penulis</label>
+                        <input type="text" class="form-control" name="author">
+                        <div class="invalid-feedback" id="author"></div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Penerbit</label>
+                        <input type="text" class="form-control" name="publisher">
+                        <div class="invalid-feedback" id="publisher"></div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Tahun Terbit</label>
+                        <input type="text" class="form-control" name="published_year">
+                        <div class="invalid-feedback" id="published_year"></div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>ISBN</label>
+                        <input type="text" class="form-control" name="isbn">
+                        <div class="invalid-feedback" id="isbn"></div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Gambar Cover Buku</label>
+                        <input type="file" class="form-control" name="cover">
+                        <div class="invalid-feedback" id="cover"></div>
+                    </div>
+                    <hr>
+                    <div class="form-group mb-3">
+                        <button type="submit" class="btn btn-primary">Simpan Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!-- script FE ada disini -->
+    <script>
+
+        $(document).on('submit', '#myForm', function(el){
+            el.preventDefault();
+            let dataForm = new FormData(this);
+            console.log(dataForm);
+            
+        })
+
+
+    </script>
+</body>
+</html>
