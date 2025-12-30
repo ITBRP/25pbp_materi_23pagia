@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+    
+    <div class="container pt-5">
+        <div class="row justify-content-center">
+            <div class="col-md">
+                <div class="alert-success" role="alert"></div>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="myTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Publisher</th>
+                                <th>Year</th>
+                                <th>ISBN</th>
+                                <th>Cover</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <script>
+        showTable();
+        function showTable(){
+            $.ajax({
+                url: "http://localhost:800/www/2526_ganjil/25pbp_uts_23pagia/aldi/be/select.php",
+                type: "GET",
+                success: function(res){
+                    let tbody = $('#myTable tbody');
+                    tbody.empty();
+                    $.each(res.data, function(index, row){
+                        tbody.append(`
+                            <tr>
+                                <td>${index+1}</td>
+                                <td>${row.title}</td>
+                                <td>${row.author}</td>
+                                <td>${row.publisher}</td>
+                                <td>${row.published_year}</td>
+                                <td>${row.isbn}</td>
+                                <td><img src="${row.cover}" width="100" height="100" /></td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-danger btn-hapus" id="${row.id}">Hapus</button>
+                                </td>
+                            </tr>
+                        `);
+                    });
+                }
+            })
+        }
+    
+        $(document).on('click', '.btn-hapus', function(){
+            let idData = $(this).attr('id');
+            
+            if(confirm("Anda yakin menghapus data?")){
+
+                $.ajax({
+                    url: "http://localhost:800/www/2526_ganjil/25pbp_uts_23pagia/aldi/be/delete.php?id="+idData,
+                    type: "DELETE",
+                    success: function(res){
+                        $('.alert-success').addClass('alert').text(res.msg);
+                        showTable();
+                    }
+                })
+
+            }
+            
+
+        });
+    </script>
+
+</body>
+</html>
